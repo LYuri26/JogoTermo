@@ -13,7 +13,18 @@ function setupGame() {
             input.classList.add("letter-box");
             input.style.position = "relative"; // Define a posição relativa para o cursor intermitente
             input.maxLength = 1;
+
+            // Adiciona o evento de input
             input.oninput = (event) => autoTab(input, row, j, event); // Passar o evento
+            
+            // Adiciona o evento de keydown para capturar a tecla Enter
+            input.onkeydown = (event) => {
+                if (event.key === "Enter") {
+                    event.preventDefault(); // Evita o comportamento padrão
+                    submitGuess(); // Chama a função de enviar a tentativa
+                }
+            };
+
             row.appendChild(input);
         }
         disableRowInputs(row); // Desativar todas as entradas na linha inicialmente

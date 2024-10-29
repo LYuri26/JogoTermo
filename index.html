@@ -4,23 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo de Palavras</title>
-    <!-- Bootstrap CSS para layout e responsividade -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Link para o estilo personalizado -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="modal.css">
 </head>
 <body>
     <header class="bg-primary text-white py-3">
         <div class="container d-flex align-items-center justify-content-between">
             <img src="senai-logo-0.png" alt="Logo SENAI" class="logo">
-            <h1 class="text-center">Jogo de Palavras</h1>
+            <h1 class="text-center">Jogo de Palavras TI</h1>
+            <!-- Botão para abrir o modal de regras -->
+            <button id="regrasButton" class="btn btn-info">Regras</button>
         </div>
     </header>
 
-    <main class="container my-4"> <!-- Alterar div para main -->
-        <!-- Área do jogo -->
+    <main class="container my-4">
         <div id="word-grid" class="mb-3 justify-content-center">
-            <!-- Gera 6 linhas, cada uma com 5 caixas de entrada para letras -->
             <div class="guess-row d-flex justify-content-center mb-2" id="attempt-1"></div>
             <div class="guess-row d-flex justify-content-center mb-2" id="attempt-2"></div>
             <div class="guess-row d-flex justify-content-center mb-2" id="attempt-3"></div>
@@ -28,29 +27,32 @@
             <div class="guess-row d-flex justify-content-center mb-2" id="attempt-5"></div>
             <div class="guess-row d-flex justify-content-center mb-2" id="attempt-6"></div>
         </div>
-
-        <!-- Botão de envio para validar a tentativa atual -->
         <div class="text-center">
             <button onclick="submitGuess()" class="btn btn-primary">Enviar</button>
         </div>
-
-        <!-- Feedback de Tentativa -->
         <p id="feedback" class="text-center font-weight-bold mt-3"></p>
     </main>
 
     <footer class="bg-primary text-white py-3 mt-5">
         <div class="container text-center">
             <p class="mb-1">&copy; 2024 Sistema de Gestão. Todos os direitos reservados.</p>
-            <p class="mb-0">Aplicação Web desenvolvida pelos instrutores: André e Lenon.</p>
+            <p class="mb-0">Aplicação Web desenvolvida pelo instrutor Lenon.</p>
         </div>
     </footer>
 
-    <!-- Bootstrap JS, jQuery, Popper.js (dependências) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- Container do Modal -->
+    <div id="modalContainer" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+
+    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <!-- Script do Jogo -->
+    <script type="module" src="modal.js"></script>
     <script type="module" src="execucao.js"></script>
     <script type="module" src="palavras.js"></script>
 </body>

@@ -22,16 +22,23 @@ const palavrasPermitidas = [
     "stone", "table", "taste", "think", "train", "truth", "tweet", "value", "video", "watch",
     "world", "yacht", "zebra", "zesty",
 
-    "alert", "cache", "chart", "clear", "drive", "flash", "focus", "input", "model", "reset",
-    "smart", "state", "track", "value", "voice", "virus"
+    "alert", "cache", "chart", "drive", "flash", "focus", "input", "laser", "model", "reset",
+    "smart", "state", "track", "value", "virus",
+    // Novas palavras em português
+    "dados", "teste", "bytes", "código", "login", "cloud", "senha", "rede", "tecla", "ponto", "sinal", "driver", "debug", "atual",
+    // Novas palavras em inglês
+    "array", "block", "email", "query", "patch", "print", "link", "trace", "cable", "alert", "label", "robot", "scope", "image", "order", "table"
 ];
 
 // Lista de palavras selecionadas para o jogo (5 letras) - apenas palavras relacionadas a TI
 const palavrasSelecionadas = [
     "alert", "cache", "chart", "drive", "flash", "focus", "input", "laser", "model", "reset",
-    "smart", "state", "track", "value", "virus"
+    "smart", "state", "track", "value", "virus",
+    // Novas palavras em português
+    "dados", "teste", "bytes", "código", "login", "cloud", "senha", "rede", "tecla", "ponto", "sinal", "driver", "debug", "atual",
+    // Novas palavras em inglês
+    "array", "block", "email", "query", "patch", "print", "link", "trace", "cable", "alert", "label", "robot", "scope", "image", "order", "table"
 ];
-
 // Função para sortear uma palavra da lista de palavras selecionadas
 function sortearPalavra() {
     const randomIndex = Math.floor(Math.random() * palavrasSelecionadas.length);
@@ -44,19 +51,39 @@ function getPalavraDoDia() {
     const horarioAtual = agora.getHours() * 60 + agora.getMinutes(); // Minutos desde a meia-noite
     const horarioAtualizacao = [480, 810, 1080]; // Horários de atualização em minutos: 08:00, 13:30, 18:00
 
-    // Limpa o localStorage sempre que a função é chamada
-    localStorage.clear();
-
-    // Verifica se já existe uma palavra armazenada
-    let palavraDoDia = localStorage.getItem("palavraDoDia");
-
-    // Se não existe ou se é um horário de atualização, sorteia uma nova palavra
-    if (!palavraDoDia || horarioAtualizacao.includes(horarioAtual)) {
-        palavraDoDia = sortearPalavra();
+    // Obtém a data da última atualização
+    const ultimaAtualizacao = localStorage.getItem("ultimaAtualizacao");
+    
+    // Se não existe uma palavra armazenada ou a data é diferente da atual
+    if (!ultimaAtualizacao) {
+        // Primeira execução, sorteia uma palavra e armazena
+        const palavraDoDia = sortearPalavra();
         localStorage.setItem("palavraDoDia", palavraDoDia);
         localStorage.setItem("ultimaAtualizacao", agora.toISOString());
+        return palavraDoDia;
+    } else {
+        const ultimaData = new Date(ultimaAtualizacao);
+        // Se a data é diferente da atual
+        if (agora.getDate() !== ultimaData.getDate() || 
+            agora.getMonth() !== ultimaData.getMonth() || 
+            agora.getFullYear() !== ultimaData.getFullYear()) {
+            // Limpa o localStorage para permitir novas tentativas
+            localStorage.clear();
+            const palavraDoDia = sortearPalavra();
+            localStorage.setItem("palavraDoDia", palavraDoDia);
+            localStorage.setItem("ultimaAtualizacao", agora.toISOString());
+            return palavraDoDia;
+        }
     }
 
+    // Verifica se a palavra deve ser atualizada baseado no horário
+    const palavraDoDia = localStorage.getItem("palavraDoDia");
+    if (horarioAtualizacao.includes(horarioAtual) && (agora.getTime() - ultimaData.getTime() >= 0)) {
+        // Se estamos no horário de atualização, mas a palavra já está fixa
+        return palavraDoDia;
+    }
+
+    // Retorna a palavra do dia armazenada
     return palavraDoDia;
 }
 
