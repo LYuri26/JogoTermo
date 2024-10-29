@@ -11,53 +11,55 @@ function setupGame() {
             const input = document.createElement("input");
             input.type = "text";
             input.classList.add("letter-box");
-            input.style.position = "relative"; // Define a posição relativa para o cursor intermitente
+            input.style.position = "relative";
             input.maxLength = 1;
+            input.autocomplete = "off";  // Evitar autocompletar em celulares
 
-            // Adiciona o evento de input
-            input.oninput = (event) => autoTab(input, row, j, event); // Passar o evento
-            
-            // Adiciona o evento de keydown para capturar a tecla Enter
+            // Ajustes para foco e rolagem automática em celulares
+            input.onfocus = () => scrollToInput(input);  // Rola a página para o campo atual
+            input.oninput = (event) => autoTab(input, row, j, event);
+
             input.onkeydown = (event) => {
                 if (event.key === "Enter") {
-                    event.preventDefault(); // Evita o comportamento padrão
-                    submitGuess(); // Chama a função de enviar a tentativa
+                    event.preventDefault();
+                    submitGuess();
                 }
             };
 
             row.appendChild(input);
         }
-        disableRowInputs(row); // Desativar todas as entradas na linha inicialmente
+        disableRowInputs(row);
     }
-    enableFirstRowInputs(); // Habilitar todos os campos da primeira tentativa
+    enableFirstRowInputs();
+}
+
+// Função para rolar a tela até o campo atual em celulares
+function scrollToInput(input) {
+    input.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
 // Função para habilitar todos os campos da primeira linha
 function enableFirstRowInputs() {
     const row = document.getElementById(`attempt-1`);
     Array.from(row.children).forEach(input => {
-        input.disabled = false; // Habilita todos os inputs da primeira linha
+        input.disabled = false;
     });
-    row.children[0].focus(); // Foca no primeiro campo habilitado
+    row.children[0].focus();
 }
 
 // Função para habilitar o campo da tentativa atual
 function enableInputForCurrentAttempt() {
     const row = document.getElementById(`attempt-${tentativas}`);
     Array.from(row.children).forEach(input => {
-        input.disabled = false; // Habilita todos os inputs da tentativa atual
+        input.disabled = false;
     });
-    row.children[0].focus(); // Foca no primeiro campo habilitado
+    row.children[0].focus();
 }
 
 // Função para alternar entre caixas automaticamente e substituir letras
 function autoTab(input, row, index, event) {
-    // Substitui a letra se já houver uma
     if (event.inputType === "insertText" && input.value.length === 1) {
-        // Se o campo já tiver uma letra, substitui
         row.children[index].value = input.value.toUpperCase();
-
-        // Foca na próxima caixa se não for a última
         if (index < 4) {
             row.children[index + 1].focus();
         }
@@ -70,31 +72,38 @@ async function submitGuess() {
     const guess = Array.from(row.children).map(input => input.value.toUpperCase()).join("");
 
     if (guess.length < 5) {
-        document.getElementById("feedback").textContent = "Complete todas as letras da palavra.";
+        showFeedback("Complete todas as letras da palavra.");
         return;
     }
 
-    // Verifica a validade da palavra localmente primeiro
     if (!palavraValida(guess)) {
-        document.getElementById("feedback").textContent = "Palavra inválida. Tente uma palavra válida.";
-        enableInputForCurrentAttempt(); // Permite edição na tentativa atual
-        return; // Retorna sem bloquear os inputs
+        showFeedback("Palavra inválida. Tente uma palavra válida.");
+        enableInputForCurrentAttempt();
+        return;
     }
 
     mostrarTentativa(guess, row);
     tentativas++;
 
     if (guess === palavraDoDia) {
-        document.getElementById("feedback").textContent = "Parabéns! Você acertou a palavra.";
+        showFeedback("Parabéns! Você acertou a palavra.");
         disableInputs();
     } else if (tentativas > 6) {
-        document.getElementById("feedback").textContent = `Você esgotou as tentativas. A palavra era: ${palavraDoDia}`;
-        mostrarLetrasFaltantes(row); // Mostrar letras da palavra
-        disableInputs(); // Bloqueia todas as entradas após esgotar tentativas
+        showFeedback(`Você esgotou as tentativas. A palavra era: ${palavraDoDia}`);
+        mostrarLetrasFaltantes(row);
+        disableInputs();
     } else {
-        blockInvalidInputs(row); // Bloqueia campos inválidos após uma tentativa válida
-        enableInputForCurrentAttempt(); // Habilitar o campo da próxima tentativa
+        blockInvalidInputs(row);
+        enableInputForCurrentAttempt();
     }
+}
+
+// Função para mostrar o feedback e rolar para ele
+function showFeedback(message) {
+    const feedback = document.getElementById("feedback");
+    feedback.textContent = message;
+    feedback.classList.add("show");
+    feedback.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
 // Função para mostrar o feedback visual da tentativa
@@ -115,7 +124,7 @@ function mostrarTentativa(guess, row) {
 function mostrarLetrasFaltantes(row) {
     for (let i = 0; i < 5; i++) {
         const box = row.children[i];
-        box.value = palavraDoDia[i]; // Mostra a letra correta
+        box.value = palavraDoDia[i];
     }
 }
 
@@ -136,7 +145,7 @@ function disableRowInputs(row) {
 function blockInvalidInputs(row) {
     Array.from(row.children).forEach((input, index) => {
         if (input.value.length > 0 && index < 5) {
-            input.disabled = true; // Bloqueia campos que foram preenchidos
+            input.disabled = true;
         }
     });
 }

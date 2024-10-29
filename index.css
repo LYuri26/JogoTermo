@@ -1,105 +1,106 @@
-/* Definindo estilos gerais */
+/* Estilos gerais */
 body {
-    background-color: #1a1a1a; /* Fundo escuro */
-    color: #f8f9fa; /* Texto claro */
-    margin: 0; /* Remove margens padrão */
-    padding: 0; /* Remove preenchimento padrão */
-    display: flex; /* Flexbox para alinhar o conteúdo */
-    flex-direction: column; /* Alinha os itens em coluna */
-    min-height: 100vh; /* Garante que a altura mínima seja 100% da altura da tela */
+    background-color: #1a1a1a;
+    color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-/* Estilo para o cabeçalho */
+/* Estilos de cabeçalho */
 header {
-    position: fixed; /* Fixo no topo da página */
-    width: 100%; /* Largura total */
-    top: 0; /* Alinha ao topo */
-    left: 0; /* Alinha à esquerda */
-    z-index: 1000; /* Garante que o cabeçalho fique sobre outros elementos */
-    background-color: #1a1a1a; /* Fundo do cabeçalho */
-    padding: 10px 0; /* Preenchimento superior e inferior */
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .logo {
-    height: auto; /* Ajusta a altura da logo automaticamente */
-    max-height: 60px; /* Define a altura máxima da logo */
+    height: auto;
+    max-height: 60px;
+    width: auto;
+    max-width: 100px;
 }
 
 h1 {
-    font-size: 1.5rem; /* Tamanho da fonte */
-    font-family: "Arial", sans-serif; /* Fonte do texto */
-    color: #fff; /* Cor do texto */
-    text-align: center; /* Alinha o texto ao centro */
+    font-size: 1.5rem;
+    font-family: "Arial", sans-serif;
+    color: #fff;
+    text-align: center;
+    flex-grow: 1;
+    margin: 0 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* Estilo do conteúdo principal */
+/* Conteúdo principal */
 main {
-    flex: 1; /* Permite que o main ocupe o espaço restante */
-    display: flex; /* Flexbox para centralizar conteúdo */
-    flex-direction: column; /* Alinha os itens em coluna */
-    justify-content: center; /* Centraliza verticalmente */
-    align-items: center; /* Centraliza horizontalmente */
-    padding: 20px; /* Preenchimento em volta do conteúdo */
-    margin-top: 80px; /* Ajustar conforme a altura do cabeçalho */
-    margin-bottom: 60px; /* Margem inferior para evitar sobreposição com o rodapé */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin-top: 80px;
+    margin-bottom: 60px;
 }
 
-
+/* Estilos de feedback */
 #feedback {
     font-size: 18px;
-    color: #f8f9fa; /* Texto claro */
+    color: #f8f9fa;
     transition: opacity 0.5s ease;
 }
 
-/* Estilo das caixas de letras */
+/* Caixas de letras */
 .guess-row {
     gap: 10px;
-    display: flex; /* Flexbox para as caixas de letras */
-    justify-content: center; /* Centraliza as caixas horizontalmente */
+    display: flex;
+    justify-content: center;
 }
 
 .letter-box {
-    width: 60px; /* Largura das caixas */
-    height: 60px; /* Altura das caixas */
-    border: 2px solid #555; /* Borda padrão mais escura */
-    border-radius: 5px; /* Cantos arredondados */
-    font-size: 24px; /* Tamanho da fonte */
+    width: 60px;
+    height: 60px;
+    border: 2px solid #555;
+    border-radius: 5px;
+    font-size: 24px;
     font-weight: bold;
-    text-align: center; /* Centraliza o texto */
-    text-transform: uppercase; /* Letras maiúsculas */
-    color: #f8f9fa; /* Letras em branco */
-    background-color: #333; /* Fundo das caixas mais escuro */
-    transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s; /* Suaviza as transições de borda, sombra e transformação */
+    text-align: center;
+    text-transform: uppercase;
+    color: #f8f9fa;
+    background-color: #333;
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 
-/* Efeito de foco e hover */
-.letter-box:focus {
-    outline: none; /* Remove o contorno padrão */
-    border-color: #007bff; /* Borda azul ao focar */
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5), 0 0 20px rgba(0, 123, 255, 0.5); /* Efeito de brilho */
-    animation: typing 0.3s ease; /* Efeito ao digitar */
-}
-
-/* Cores personalizadas para letras após envio */
+/* Cores e animações */
 .letter-box.correct {
-    background-color: #4CAF50; /* Verde para letras corretas */
-    color: #fff; /* Letras em branco */
-    animation: fadeIn 0.5s, pulse 1s infinite; /* Animações de feedback */
+    background-color: #4CAF50;
+    color: #fff;
+    animation: fadeIn 0.5s, pulse 1s infinite;
 }
 
 .letter-box.present {
-    background-color: #FFC107; /* Amarelo para letras presentes */
-    color: #fff; /* Letras em branco */
-    animation: fadeIn 0.5s, pulse 1s infinite; /* Animações de feedback */
+    background-color: #FFC107;
+    color: #fff;
+    animation: fadeIn 0.5s, pulse 1s infinite;
 }
 
 .letter-box.absent {
-    background-color: #9E9E9E; /* Cinza para letras ausentes */
-    color: #fff; /* Letras em branco */
-    animation: fadeIn 0.5s, shake 0.5s; /* Animações de feedback */
+    background-color: #9E9E9E;
+    color: #fff;
+    animation: fadeIn 0.5s, shake 0.5s;
 }
 
-/* Remover setas dos inputs de número */
 input[type="text"] {
     -moz-appearance: textfield;
 }
@@ -130,9 +131,8 @@ input[type="text"]::-webkit-inner-spin-button {
     100% { transform: translateX(0); }
 }
 
-/* Estilo de brilho geral do feedback */
 .feedback-bright {
-    animation: brightEffect 0.5s forwards; /* Animação de brilho */
+    animation: brightEffect 0.5s forwards;
 }
 
 @keyframes brightEffect {
@@ -141,46 +141,121 @@ input[type="text"]::-webkit-inner-spin-button {
     100% { text-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
 }
 
-/* Animação ao digitar */
-@keyframes typing {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
-
-/* Estilos para mostrar feedback */
 .feedback {
-    opacity: 0; /* Inicialmente invisível */
+    opacity: 0;
 }
 
 .feedback.show {
-    opacity: 1; /* Mostra feedback quando necessário */
+    opacity: 1;
 }
 
-/* Customização do rodapé */
+/* Rodapé */
 footer {
-    background-color: #045cac; /* Cor de fundo inspirada pelo SENAI */
-    color: #fff; /* Cor do texto */
-    position: fixed; /* Fixo no rodapé da página */
-    width: 100%; /* Largura total */
-    bottom: 0; /* Alinha ao fundo */
-    left: 0; /* Alinha à esquerda */
-    z-index: 1000; /* Garante que o rodapé fique sobre outros elementos */
-    padding: 10px 0; /* Preenchimento superior e inferior */
+    background-color: #045cac;
+    color: #fff;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 10px 0;
 }
 
 footer p {
-    margin: 0; /* Remove a margem padrão dos parágrafos */
-    font-size: 1rem; /* Tamanho da fonte */
-    text-align: center; /* Centraliza o texto do rodapé */
+    margin: 0;
+    font-size: 1rem;
+    text-align: center;
 }
 
-/* Remove a margem superior do primeiro parágrafo */
-footer .mb-1 {
-    margin-bottom: 0.5rem !important;
+/* Ajustes para telas menores */
+@media (max-width: 768px) {
+    header {
+        padding: 8px 15px;
+    }
+
+    .logo {
+        max-height: 50px;
+        max-width: 80px;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    .letter-box {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+
+    main {
+        padding: 10px;
+        margin-top: 70px;
+        margin-bottom: 50px;
+    }
+
+    #feedback {
+        font-size: 14px;
+    }
 }
 
-/* Remove a margem inferior do segundo parágrafo */
-footer .mb-0 {
-    margin-bottom: 0 !important;
+/* Ajustes para telas muito pequenas */
+@media (max-width: 480px) {
+    header {
+        flex-direction: column;
+        padding: 5px 10px;
+    }
+
+    .logo {
+        max-height: 40px;
+        max-width: 60px;
+    }
+
+    h1 {
+        font-size: 1rem;
+        margin-top: 5px;
+        text-align: center;
+    }
+
+    .letter-box {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+
+    main {
+        padding: 8px;
+        margin-top: 60px;
+        margin-bottom: 40px;
+    }
+
+    #feedback {
+        font-size: 12px;
+    }
+}
+
+/* Ajustes para telas muito estreitas */
+@media (max-width: 360px) {
+    .logo {
+        max-height: 35px;
+        max-width: 50px;
+    }
+
+    h1 {
+        font-size: 0.9rem;
+    }
+
+    .letter-box {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+    }
+
+    main {
+        margin-top: 55px;
+        margin-bottom: 35px;
+    }
+
+    footer p {
+        font-size: 0.9rem;
+    }
 }
