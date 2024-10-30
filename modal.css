@@ -1,7 +1,7 @@
-/* Estilos gerais para o modal de regras */
+/* Estilos gerais para o modal */
 body.modal-body {
     font-family: Arial, sans-serif;
-    background-color: #1c1c1c; /* Fundo escuro */
+    background-color: #f0f0f0;
     margin: 0;
     padding: 0;
     display: flex;
@@ -11,68 +11,138 @@ body.modal-body {
 }
 
 .modal-container {
-    max-width: 600px;
-    width: 90%;
-    background-color: #2c2c2c; /* Fundo do modal escuro */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    max-width: 1000px; /* Aumentando a largura do modal */
+    width: 95%; /* Ajustando a largura para ocupar mais espaço */
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    transition: all 0.3s ease-in-out;
 }
 
-.modal-header,
-.modal-footer {
+.modal-header, .modal-footer {
     padding: 15px;
-    background-color: #045cac; /* Azul */
+    background-color: #045cac;
     color: #fff;
     text-align: center;
+    font-weight: bold;
 }
 
-.modal-header h1 {
-    font-size: 1.5em;
+.modal-header h5 {
+    font-size: 1.6em;
     margin: 0;
 }
 
 .modal-content {
+    display: flex;
+    flex-wrap: wrap;
     padding: 20px;
+    gap: 20px;
+    color: #333;
 }
 
+.modal-body-left, .modal-body-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Título de seção */
 .modal-content h2 {
-    font-size: 1.5em; /* Aumentar o tamanho do título */
-    color: #fff; /* Texto branco */
+    font-size: 1.4em;
+    color: #045cac;
+    border-bottom: 2px solid #045cac;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
 }
 
-.modal-content p,
-.modal-content ul {
-    margin: 15px 0;
-    color: #000000; /* Texto mais claro para contraste */
+/* Texto e listas */
+.modal-content p {
+    color: #444;
     line-height: 1.6;
+    font-size: 1rem;
 }
 
+/* Tópicos com ícones */
 .modal-content ul {
-    list-style: none;
+    margin: 10px 0;
     padding: 0;
+    list-style: none;
+    line-height: 1.6;
 }
 
 .modal-content ul li {
     display: flex;
     align-items: center;
+    background: #e9f1fc;
+    padding: 10px;
+    border-radius: 8px;
     margin-bottom: 10px;
+    font-size: 1rem;
+    color: #333;
 }
 
 .modal-content ul li img {
-    margin-right: 10px;
+    width: 32px;
+    margin-right: 12px;
 }
 
-.modal-footer button {
-    padding: 10px 20px;
+/* Lista de exemplos com duas colunas */
+.word-list {
+    column-count: 2;
+    column-gap: 20px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.word-list li {
+    margin-bottom: 8px;
     font-size: 1rem;
-    background-color: #045cac; /* Azul */
+}
+
+/* Botão no rodapé */
+.modal-footer button {
+    padding: 12px 24px;
+    font-size: 1rem;
+    background-color: #045cac;
     color: #fff;
     border: none;
+    border-radius: 6px;
     cursor: pointer;
-    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 .modal-footer button:hover {
-    background-color: #0375b4; /* Azul mais claro ao passar o mouse */
+    background-color: #0375b4;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .modal-container {
+        max-width: 95%; /* Ocupa quase toda a largura da tela em dispositivos menores */
+    }
+    .modal-content {
+        flex-direction: column;
+    }
+    .word-list {
+        column-count: 1;
+    }
+}
+.modal-dialog.modal-lg {
+    max-width: 1000px; /* Defina a largura máxima desejada */
+    width: 95%; /* Defina a largura padrão em relação à tela */
+}
+
+.modal-content {
+    border-radius: 12px; /* Estilo para bordas do modal */
+}
+
+/* Para garantir que o modal fique centralizado */
+.modal.fade .modal-dialog {
+    transform: translate(0, 0); /* Ajuste na transformação para manter centralizado */
 }
