@@ -1709,6 +1709,8 @@ const palavrasPermitidas = [
   "senai",
   "enter",
   "lenon",
+  "linux",
+
 ];
 
 // Lista de palavras selecionadas para o jogo (5 letras) - apenas palavras relacionadas a TI
@@ -1764,6 +1766,7 @@ const palavrasSelecionadas = [
   "senai",
   "enter",
   "lenon",
+  "linux",
 ];
 // Função para sortear uma palavra da lista de palavras selecionadas
 function sortearPalavra() {
