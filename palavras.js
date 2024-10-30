@@ -1710,10 +1710,42 @@ const palavrasPermitidas = [
   "enter",
   "lenon",
   "linux",
+  "gamer",  // Para se referir a jogadores
+  "haste",  // Referência a postagens em redes sociais
+  "drama",  // Comum em discussões sobre cultura pop
+  "salto",  // Pode se referir a "salto" em tecnologia
+  "tenda",  // Referência a eventos, como festas ou festivais
+  "passe",  // Referência a passagens em jogos ou eventos
+  "lazer",  // Atividades de entretenimento
+  "frase",  // Referência a citações ou memes
+  "festa",  // Eventos sociais comuns
+  "flash",  // Pode referir-se a tecnologias rápidas ou ao "flash" de câmera
+  "risos",  // Referência ao humor e memes
+  "sorte",  // Popular em jogos e sorteios
+  "banda",  // Referência a grupos musicais
+  "trio",   // Referência a grupos ou equipes
+  // Novas palavras
+  "click",  // Interação digital
+  "foto",   // Referência a fotos em redes sociais
+  "meme",   // Cultura da internet
+  "swipe",  // Ação comum em aplicativos móveis
+  "pinky",  // Referência a uma cor ou estilo
+  "cyber",  // Relacionado a tecnologia e segurança
+  "hypee",  // Referência a entusiasmo
+  "viral",  // Conteúdo que se espalha rapidamente
+  "score",  // Referência a pontuações em jogos
+  "drift",  // Estilo de dirigir ou jogar
+  "desta",  // Palavra comum em contexto de eventos ou coisas em destaque
+  "tropo",  // Referência a clichês em histórias
+  "emoji",  // Ícones usados em mensagens
+  "quase",  // Referência a algo que está próximo de acontecer
+  "track",  // Música ou trilha sonora
+  "level",  // Níveis em jogos ou progressão
+  "piano",  // Referência a música
+  "pombo",
 
 ];
 
-// Lista de palavras selecionadas para o jogo (5 letras) - apenas palavras relacionadas a TI
 const palavrasSelecionadas = [
   "alert",
   "cache",
@@ -1730,7 +1762,6 @@ const palavrasSelecionadas = [
   "track",
   "value",
   "virus",
-  // Novas palavras em português
   "dados",
   "teste",
   "bytes",
@@ -1745,7 +1776,6 @@ const palavrasSelecionadas = [
   "driver",
   "debug",
   "atual",
-  // Novas palavras em inglês
   "array",
   "block",
   "email",
@@ -1767,7 +1797,41 @@ const palavrasSelecionadas = [
   "enter",
   "lenon",
   "linux",
+  "gamer",  // Para se referir a jogadores
+  "haste",  // Referência a postagens em redes sociais
+  "drama",  // Comum em discussões sobre cultura pop
+  "salto",  // Pode se referir a "salto" em tecnologia
+  "tenda",  // Referência a eventos, como festas ou festivais
+  "passe",  // Referência a passagens em jogos ou eventos
+  "lazer",  // Atividades de entretenimento
+  "frase",  // Referência a citações ou memes
+  "festa",  // Eventos sociais comuns
+  "flash",  // Pode referir-se a tecnologias rápidas ou ao "flash" de câmera
+  "risos",  // Referência ao humor e memes
+  "sorte",  // Popular em jogos e sorteios
+  "banda",  // Referência a grupos musicais
+  "trio",   // Referência a grupos ou equipes
+  // Novas palavras
+  "click",  // Interação digital
+  "foto",   // Referência a fotos em redes sociais
+  "meme",   // Cultura da internet
+  "swipe",  // Ação comum em aplicativos móveis
+  "pinky",  // Referência a uma cor ou estilo
+  "cyber",  // Relacionado a tecnologia e segurança
+  "hypee",  // Referência a entusiasmo
+  "viral",  // Conteúdo que se espalha rapidamente
+  "score",  // Referência a pontuações em jogos
+  "drift",  // Estilo de dirigir ou jogar
+  "desta",  // Palavra comum em contexto de eventos ou coisas em destaque
+  "tropo",  // Referência a clichês em histórias
+  "emoji",  // Ícones usados em mensagens
+  "quase",  // Referência a algo que está próximo de acontecer
+  "track",  // Música ou trilha sonora
+  "level",  // Níveis em jogos ou progressão
+  "piano",  // Referência a música
+  "pombo",
 ];
+
 // Função para sortear uma palavra da lista de palavras selecionadas
 function sortearPalavra() {
   const randomIndex = Math.floor(Math.random() * palavrasSelecionadas.length);
