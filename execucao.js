@@ -1,9 +1,7 @@
-// script.js
-import { palavraDoDia, palavrasPermitidas, tentativaAtual } from './palavras.js';
+import { palavraDoDia, tentativaAtual } from './palavras.js';
 
-let tentativas = tentativaAtual; // Usar uma nova variável para controlar as tentativas
+let tentativas = tentativaAtual;
 
-// Função para criar a estrutura das tentativas
 function setupGame() {
     for (let i = 1; i <= 6; i++) {
         const row = document.getElementById(`attempt-${i}`);
@@ -13,17 +11,31 @@ function setupGame() {
             input.classList.add("letter-box");
             input.style.position = "relative";
             input.maxLength = 1;
-            input.autocomplete = "off";  // Evitar autocompletar em celulares
+            input.autocomplete = "off";
 
-            // Ajustes para foco e rolagem automática em celulares
-            input.onfocus = () => scrollToInput(input);  // Rola a página para o campo atual
-            input.oninput = (event) => autoTab(input, row, j, event);
+            input.oninput = (event) => {
+                const value = input.value.toUpperCase();
 
+                if (!/^[A-Z]$/.test(value)) {
+                    input.value = "";
+                    return;
+                }
+
+                input.value = value;
+                autoTab(input, row, j, event);
+            };
+
+            input.onfocus = () => scrollToInput(input);
             input.onkeydown = (event) => {
                 if (event.key === "Enter") {
                     event.preventDefault();
                     submitGuess();
                 }
+            };
+
+            input.onclick = () => {
+                input.value = '';
+                input.focus();
             };
 
             row.appendChild(input);
@@ -33,12 +45,10 @@ function setupGame() {
     enableFirstRowInputs();
 }
 
-// Função para rolar a tela até o campo atual em celulares
 function scrollToInput(input) {
     input.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
-// Função para habilitar todos os campos da primeira linha
 function enableFirstRowInputs() {
     const row = document.getElementById(`attempt-1`);
     Array.from(row.children).forEach(input => {
@@ -47,7 +57,6 @@ function enableFirstRowInputs() {
     row.children[0].focus();
 }
 
-// Função para habilitar o campo da tentativa atual
 function enableInputForCurrentAttempt() {
     const row = document.getElementById(`attempt-${tentativas}`);
     Array.from(row.children).forEach(input => {
@@ -56,17 +65,59 @@ function enableInputForCurrentAttempt() {
     row.children[0].focus();
 }
 
-// Função para alternar entre caixas automaticamente e substituir letras
 function autoTab(input, row, index, event) {
     if (event.inputType === "insertText" && input.value.length === 1) {
-        row.children[index].value = input.value.toUpperCase();
         if (index < 4) {
             row.children[index + 1].focus();
         }
     }
 }
 
-// Função para enviar a tentativa
+function validateGuess(guess) {
+    // Expressão regular para detectar sequências de três ou mais vogais consecutivas
+    const regexVogais = /[AEIOU]{3,}/;
+    
+    // Expressão regular para detectar sequências de três ou mais consoantes consecutivas
+    const regexConsoantes = /[^AEIOU]{3,}/;
+    
+    // Verifica se há uma sequência de três ou mais vogais
+    if (regexVogais.test(guess)) {
+        showFeedback("Sequências de três ou mais vogais consecutivas são proibidas.");
+        return false;
+    }
+
+    // Verifica se há uma sequência de três ou mais consoantes consecutivas
+    if (regexConsoantes.test(guess)) {
+        showFeedback("Sequências de três ou mais consoantes consecutivas são proibidas.");
+        return false;
+    }
+
+    // Verifica se há uma sequência alfabética de três ou mais letras consecutivas
+    let count = 1; // Contador para letras consecutivas
+    for (let i = 1; i < guess.length; i++) {
+        if (guess.charCodeAt(i) - guess.charCodeAt(i - 1) === 1) {
+            count++; // Incrementa o contador se for uma sequência
+            if (count >= 3) {
+                showFeedback("Sequências alfabéticas consecutivas de três ou mais letras são proibidas.");
+                return false;
+            }
+        } else {
+            count = 1; // Reseta o contador se não for sequência
+        }
+    }
+
+    // Verifica se há três ou mais consoantes idênticas consecutivas
+    for (let i = 2; i < guess.length; i++) {
+        if (guess[i] === guess[i - 1] && guess[i] === guess[i - 2] && !/[AEIOU]/.test(guess[i])) {
+            showFeedback("Sequências de três ou mais consoantes iguais consecutivas são proibidas.");
+            return false;
+        }
+    }
+
+    return true;
+}
+
+
 async function submitGuess() {
     const row = document.getElementById(`attempt-${tentativas}`);
     const guess = Array.from(row.children).map(input => input.value.toUpperCase()).join("");
@@ -78,6 +129,11 @@ async function submitGuess() {
 
     if (!palavraValida(guess)) {
         showFeedback("Palavra inválida. Tente uma palavra válida.");
+        enableInputForCurrentAttempt();
+        return;
+    }
+
+    if (!validateGuess(guess)) {
         enableInputForCurrentAttempt();
         return;
     }
@@ -98,7 +154,6 @@ async function submitGuess() {
     }
 }
 
-// Função para mostrar o feedback e rolar para ele
 function showFeedback(message) {
     const feedback = document.getElementById("feedback");
     feedback.textContent = message;
@@ -106,7 +161,6 @@ function showFeedback(message) {
     feedback.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
-// Função para mostrar o feedback visual da tentativa
 function mostrarTentativa(guess, row) {
     for (let i = 0; i < 5; i++) {
         const box = row.children[i];
@@ -120,7 +174,6 @@ function mostrarTentativa(guess, row) {
     }
 }
 
-// Mostra as letras da palavra correta após esgotar as tentativas
 function mostrarLetrasFaltantes(row) {
     for (let i = 0; i < 5; i++) {
         const box = row.children[i];
@@ -128,7 +181,6 @@ function mostrarLetrasFaltantes(row) {
     }
 }
 
-// Desativa os campos de entrada após a vitória ou a última tentativa
 function disableInputs() {
     for (let i = 1; i <= 6; i++) {
         const row = document.getElementById(`attempt-${i}`);
@@ -136,12 +188,10 @@ function disableInputs() {
     }
 }
 
-// Função para desativar todas as entradas em uma linha
 function disableRowInputs(row) {
     Array.from(row.children).forEach(input => input.disabled = true);
 }
 
-// Função para bloquear campos inválidos
 function blockInvalidInputs(row) {
     Array.from(row.children).forEach((input, index) => {
         if (input.value.length > 0 && index < 5) {
@@ -150,13 +200,9 @@ function blockInvalidInputs(row) {
     });
 }
 
-// Função para verificar se uma palavra está na lista permitida
 function palavraValida(palavra) {
-    return palavrasPermitidas.includes(palavra.toLowerCase());
+    return palavra.length === 5;
 }
 
-// Adiciona a função submitGuess ao objeto window
 window.submitGuess = submitGuess;
-
-// Inicializa o jogo
 setupGame();
