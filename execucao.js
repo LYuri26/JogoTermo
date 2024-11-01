@@ -16,7 +16,8 @@ function setupGame() {
             input.oninput = (event) => {
                 const value = input.value.toUpperCase();
 
-                if (!/^[A-Z]$/.test(value)) {
+                // Regex para aceitar letras de A-Z, acentuadas e caracteres especiais
+                if (!/^[A-ZÀ-ÖØ-ÿ]$/.test(value)) {  // Adicionando acentos e caracteres especiais
                     input.value = "";
                     return;
                 }
@@ -74,19 +75,17 @@ function autoTab(input, row, index, event) {
 }
 
 function validateGuess(guess) {
-    // Expressão regular para detectar sequências de três ou mais vogais consecutivas
-    const regexVogais = /[AEIOU]{3,}/;
-    
-    // Expressão regular para detectar sequências de três ou mais consoantes consecutivas
-    const regexConsoantes = /[^AEIOU]{3,}/;
-    
-    // Verifica se há uma sequência de três ou mais vogais
-    if (regexVogais.test(guess)) {
-        showFeedback("Sequências de três ou mais vogais consecutivas são proibidas.");
+    // Expressão regular para detectar quatro ou mais vogais consecutivas
+    const regexQuatroVogais = /[AEIOUÀ-ÖØ-ÿ]{4,}/;  // Inclui acentos
+
+    // Verifica se há quatro ou mais vogais consecutivas
+    if (regexQuatroVogais.test(guess)) {
+        showFeedback("Sequências de quatro ou mais vogais consecutivas são proibidas.");
         return false;
     }
 
-    // Verifica se há uma sequência de três ou mais consoantes consecutivas
+    // Expressão regular para detectar sequências de três ou mais consoantes consecutivas
+    const regexConsoantes = /[^AEIOUÀ-ÖØ-ÿ]{3,}/;  // Inclui acentos
     if (regexConsoantes.test(guess)) {
         showFeedback("Sequências de três ou mais consoantes consecutivas são proibidas.");
         return false;
@@ -108,7 +107,7 @@ function validateGuess(guess) {
 
     // Verifica se há três ou mais consoantes idênticas consecutivas
     for (let i = 2; i < guess.length; i++) {
-        if (guess[i] === guess[i - 1] && guess[i] === guess[i - 2] && !/[AEIOU]/.test(guess[i])) {
+        if (guess[i] === guess[i - 1] && guess[i] === guess[i - 2] && !/[AEIOUÀ-ÖØ-ÿ]/.test(guess[i])) {
             showFeedback("Sequências de três ou mais consoantes iguais consecutivas são proibidas.");
             return false;
         }
@@ -116,6 +115,7 @@ function validateGuess(guess) {
 
     return true;
 }
+
 
 
 async function submitGuess() {

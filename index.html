@@ -13,24 +13,39 @@
         <div class="container d-flex align-items-center justify-content-between">
             <img src="senai-logo-0.png" alt="Logo SENAI" class="logo">
             <h1 class="text-center">Jogo de Palavras TI</h1>
-            <!-- Botão para abrir o modal de regras -->
-            <button id="regrasButton" class="btn btn-info">Regras</button>
+            <button id="regrasButton" class="btn btn-info" data-toggle="modal" data-target="#modalContainer">Regras</button>
         </div>
     </header>
 
     <main class="container my-4">
-        <div id="word-grid" class="mb-3 justify-content-center">
-            <div class="guess-row d-flex justify-content-center mb-2" id="attempt-1"></div>
-            <div class="guess-row d-flex justify-content-center mb-2" id="attempt-2"></div>
-            <div class="guess-row d-flex justify-content-center mb-2" id="attempt-3"></div>
-            <div class="guess-row d-flex justify-content-center mb-2" id="attempt-4"></div>
-            <div class="guess-row d-flex justify-content-center mb-2" id="attempt-5"></div>
-            <div class="guess-row d-flex justify-content-center mb-2" id="attempt-6"></div>
+        <div id="word-grid" class="mb-3">
+            <!-- Grade para as tentativas -->
+            <div class="d-flex justify-content-center mb-2">
+                <div class="guess-row" id="attempt-1"></div>
+            </div>
+            <div class="d-flex justify-content-center mb-2">
+                <div class="guess-row" id="attempt-2"></div>
+            </div>
+            <div class="d-flex justify-content-center mb-2">
+                <div class="guess-row" id="attempt-3"></div>
+            </div>
+            <div class="d-flex justify-content-center mb-2">
+                <div class="guess-row" id="attempt-4"></div>
+            </div>
+            <div class="d-flex justify-content-center mb-2">
+                <div class="guess-row" id="attempt-5"></div>
+            </div>
+            <div class="d-flex justify-content-center mb-2">
+                <div class="guess-row" id="attempt-6"></div>
+            </div>
         </div>
+
         <div class="text-center">
             <button onclick="submitGuess()" class="btn btn-primary">Enviar</button>
         </div>
+        
         <p id="feedback" class="text-center font-weight-bold mt-3"></p>
+        <div id="dica" class="text-center font-weight-bold mt-3"></div>
     </main>
 
     <footer class="bg-primary text-white py-3 mt-5">
