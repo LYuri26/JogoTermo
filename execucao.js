@@ -85,7 +85,7 @@ function validateGuess(guess) {
     }
 
     // Expressão regular para detectar sequências de três ou mais consoantes consecutivas
-    const regexConsoantes = /[^AEIOUÀ-ÖØ-ÿ]{3,}/;  // Inclui acentos
+    const regexConsoantes = /[^AEIOUÀ-ÖØ-ÿ]{4,}/;  // Inclui acentos
     if (regexConsoantes.test(guess)) {
         showFeedback("Sequências de três ou mais consoantes consecutivas são proibidas.");
         return false;
