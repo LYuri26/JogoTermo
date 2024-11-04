@@ -18,7 +18,6 @@ const palavrasSelecionadas = [
   "dados",
   "teste",
   "bytes",
-  "código",
   "login",
   "cloud",
   "senha",
@@ -26,7 +25,6 @@ const palavrasSelecionadas = [
   "tecla",
   "ponto",
   "sinal",
-  "driver",
   "debug",
   "atual",
   "array",
@@ -35,7 +33,7 @@ const palavrasSelecionadas = [
   "query",
   "patch",
   "print",
-  "link",
+  "links",
   "trace",
   "cable",
   "alert",
@@ -63,15 +61,14 @@ const palavrasSelecionadas = [
   "risos",  // Referência ao humor e memes
   "sorte",  // Popular em jogos e sorteios
   "banda",  // Referência a grupos musicais
-  "trio",   // Referência a grupos ou equipes
-  // Novas palavras
+  "trios",   // Referência a grupos ou equipes
   "click",  // Interação digital
-  "foto",   // Referência a fotos em redes sociais
-  "meme",   // Cultura da internet
+  "fotos",   // Referência a fotos em redes sociais
+  "memes",   // Cultura da internet
   "swipe",  // Ação comum em aplicativos móveis
   "pinky",  // Referência a uma cor ou estilo
   "cyber",  // Relacionado a tecnologia e segurança
-  "hypee",  // Referência a entusiasmo
+  "hypar",  // Referência a entusiasmo
   "viral",  // Conteúdo que se espalha rapidamente
   "score",  // Referência a pontuações em jogos
   "drift",  // Estilo de dirigir ou jogar
@@ -105,7 +102,6 @@ const dicas = [
   "Conjunto de informações organizadas", // dados
   "Processo de avaliar ou experimentar", // teste
   "Unidade de informação digital", // bytes
-  "Instrução para máquinas ou sistemas", // código
   "Credencial de acesso a sistemas", // login
   "Armazenamento remoto de dados", // cloud
   "Código secreto para acesso", // senha
@@ -113,7 +109,6 @@ const dicas = [
   "digitar", // tecla
   "Posição ou lugar específico", // ponto
   "Sinalização de conexão", // sinal
-  "Software que controla hardware", // driver
   "Processo de encontrar e corrigir erros", // debug
   "Versão mais recente de algo", // atual
   "Conjunto de elementos relacionados", // array
@@ -157,7 +152,7 @@ const dicas = [
   "Movimento rápido em aplicativos", // swipe
   "Cor ou tom específico", // pinky
   "Área de tecnologia e segurança cibernética", // cyber
-  "Sentimento de excitação ou entusiasmo", // hypee
+  "Sentimento de excitação ou entusiasmo", // hypar
   "Conteúdo que se espalha rapidamente", // viral
   "Pontuação em jogos ou competições", // score
   "Estilo de conduzir veículos ou jogar", // drift
